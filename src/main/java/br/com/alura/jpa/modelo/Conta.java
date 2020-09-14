@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Conta {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Integer agencia;
 	private Integer numero;
