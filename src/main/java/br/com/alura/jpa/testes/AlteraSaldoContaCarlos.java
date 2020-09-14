@@ -6,34 +6,17 @@ import javax.persistence.Persistence;
 
 import br.com.alura.jpa.modelo.Conta;
 
-public class CriaConta {
-
+public class AlteraSaldoContaCarlos {
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("contas");
 		EntityManager em = emf.createEntityManager();
 		
-		Conta conta = new Conta();
-		conta.setTitular("Márcia");
-		conta.setNumero(123456);
-		conta.setAgencia(4332211);
+		Conta contaDoCarlos = em.find(Conta.class, 1L);
 		
 		em.getTransaction().begin();
 		
-		em.persist(conta);
-		
-		conta.setSaldo(1000.0);
+		contaDoCarlos.setSaldo(300.0);
 		
 		em.getTransaction().commit();
-		em.close();
-
-		EntityManager em2 = emf.createEntityManager();
-		System.out.println("ID da conta da Márcia: " + conta.getId());
-		conta.setSaldo(10.000);
-		
-		em2.getTransaction().begin();
-		
-		em2.merge(conta);
-		
-		em2.getTransaction().commit();
 	}
 }
