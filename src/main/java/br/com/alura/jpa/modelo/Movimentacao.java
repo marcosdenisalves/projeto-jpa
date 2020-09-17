@@ -2,6 +2,8 @@ package br.com.alura.jpa.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,7 +30,10 @@ public class Movimentacao {
 	private LocalDateTime data;
 	private String descricao;
 	private BigDecimal valor;
-
+	
+	@ManyToMany
+	private List<Categoria> categorias = new ArrayList<Categoria>();
+	
 	@ManyToOne
 	private Conta conta;
 
@@ -77,5 +83,34 @@ public class Movimentacao {
 
 	public void setConta(Conta conta) {
 		this.conta = conta;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Movimentacao [id=");
+		builder.append(id);
+		builder.append(", tipoMovimentacao=");
+		builder.append(tipoMovimentacao);
+		builder.append(", data=");
+		builder.append(data);
+		builder.append(", descricao=");
+		builder.append(descricao);
+		builder.append(", valor=");
+		builder.append(valor);
+		builder.append(", categorias=");
+		builder.append(categorias);
+		builder.append(", conta=");
+		builder.append(conta);
+		builder.append("]");
+		return builder.toString();
 	}
 }
