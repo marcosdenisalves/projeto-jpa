@@ -1,15 +1,19 @@
 package br.com.alura.jpa.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "conta")
 public class Conta {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -18,6 +22,9 @@ public class Conta {
 	private Integer numero;
 	private Double saldo;
 
+	@OneToMany(mappedBy = "conta", fetch = FetchType.EAGER)
+	private List<Movimentacao> movimentacoes;
+
 	public Long getId() {
 		return id;
 	}
@@ -25,7 +32,7 @@ public class Conta {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Integer getAgencia() {
 		return agencia;
 	}
@@ -56,5 +63,9 @@ public class Conta {
 
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
+	}
+
+	public List<Movimentacao> getMovimentacoes() {
+		return movimentacoes;
 	}
 }
