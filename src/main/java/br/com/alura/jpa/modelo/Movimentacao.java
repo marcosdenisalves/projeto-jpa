@@ -92,25 +92,4 @@ public class Movimentacao {
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Movimentacao [id=");
-		builder.append(id);
-		builder.append(", tipoMovimentacao=");
-		builder.append(tipoMovimentacao);
-		builder.append(", data=");
-		builder.append(data);
-		builder.append(", descricao=");
-		builder.append(descricao);
-		builder.append(", valor=");
-		builder.append(valor);
-		builder.append(", categorias=");
-		builder.append(categorias);
-		builder.append(", conta=");
-		builder.append(conta);
-		builder.append("]");
-		return builder.toString();
-	}
 }
