@@ -38,7 +38,7 @@ public class TestaRelacionamentoMovimentacaoCategoria {
 		movimentacao2.setCategorias(Arrays.asList(categoria, categoria2));
 		movimentacao2.setConta(conta);
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("contas");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("alura");
 		EntityManager em = emf.createEntityManager();
 		
 		em.getTransaction().begin();
