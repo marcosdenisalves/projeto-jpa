@@ -16,19 +16,19 @@ import br.com.alura.jpa.modelo.Movimentacao;
 
 public class MovimentacaoDAO {
 	private EntityManager em;
-	
+
 	public MovimentacaoDAO(EntityManager em) {
 		this.em = em;
 	}
-	
-	public List<Movimentacao> getMovimentacoesFiltradasPorData(Integer dia, Integer mes, Integer ano){
-			
+
+	public List<Movimentacao> getMovimentacoesFiltradasPorData(Integer dia, Integer mes, Integer ano) {
+
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Movimentacao> query = builder.createQuery(Movimentacao.class);
-		
+
 		Root<Movimentacao> root = query.from(Movimentacao.class);
 		List<Predicate> predicates = new ArrayList<Predicate>();
-		
+
 		if (dia != null) {
 			Predicate predicate = builder.equal(builder.function("day", Integer.class, root.get("data")), dia);
 			predicates.add(predicate);
@@ -42,11 +42,11 @@ public class MovimentacaoDAO {
 			Predicate predicate = builder.equal(builder.function("year", Integer.class, root.get("data")), ano);
 			predicates.add(predicate);
 		}
-		
+
 		query.where((Predicate[]) predicates.toArray(new Predicate[0]));
-		
-		TypedQuery<Movimentacao> typedQuery = em.createQuery(query);  
-		
+
+		TypedQuery<Movimentacao> typedQuery = em.createQuery(query);
+
 		return typedQuery.getResultList();
 	}
 
@@ -55,12 +55,11 @@ public class MovimentacaoDAO {
 		TypedQuery<MediaComData> query = em.createNamedQuery("mediaDiariaMovimentacoes", MediaComData.class);
 		return query.getResultList();
 	}
-	
+
 	public BigDecimal getSomaDasMovimentacoes() {
 		String jpql = "select sum(m.valor) from Movimentacao m";
-		
+
 		TypedQuery<BigDecimal> query = em.createQuery(jpql, BigDecimal.class);
-		
 		return query.getSingleResult();
 	}
 }
